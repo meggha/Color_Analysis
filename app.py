@@ -46,8 +46,8 @@ def resultPage():
     skin_color = data['skinColor']
     hair_color = data['hairColor']
     eye_color = data['eyeColor']
-    text = str(color_analysis(skin_color,hair_color,eye_color))[7:]
-    text=decode_escapes(text).replace("*"," ")
+    text = str(color_analysis(skin_color,hair_color,eye_color))[6:]
+    #text=decode_escapes(text).replace("*"," ")
     return jsonify({"text" : text })
   else:
     return jsonify({'error': 'Invalid request method. Please use POST.'})
