@@ -67,16 +67,20 @@ function ImageUploader() {
 
   const generateColor = async () => {
     try {
-      //  console.log("one",skinColor, hairColor, eyeColor);
       const response = await fetch('/resultPage', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ skinColor, hairColor, eyeColor }),
       });
-      //console.log("two");
       const data = await response.json();
-      setResponse(data)
-      console.log("three",data);
+      var myJson = JSON.stringify(data);
+      const formattedData = myJson.slice(11, -6)
+      .replace(/\\n/g, '<br>') 
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)/g, '<p>$1</p>')
+      .replace(/\\/g, ' ');
+      console.log("four",formattedData);
+      setResponse(formattedData);
     } catch (error) {
       console.error('Error fetching color', error);
     }
@@ -122,7 +126,7 @@ function ImageUploader() {
   <button class="button" onClick={() => handleAssignColor('eyes')}>Assign Eye Color</button>
   <button onClick={generateColor}>Submit</button>
       <div style={{color:"white",fontSize:"2rem"}}>
-        Result: {response ? response["text"]:" Submit a response"}
+        Result: {response ? <div dangerouslySetInnerHTML={{ __html: response }} /> : "Submit a response"}
       </div>
 </div>
   );

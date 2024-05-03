@@ -77,7 +77,7 @@ body{
   }
   
    .card .card_title__container .card_title {
-    font-size: 3rem;
+    font-size: 4rem;
     color: var(--white);
     display: flex;
     justify-content: center; 
